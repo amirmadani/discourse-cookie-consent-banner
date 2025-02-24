@@ -42,6 +42,12 @@ main_text:
 dismiss_button_text:
   type: string
   default: "Got it!"
+allow_button_text:
+  type: string
+  default: "Allow"
+deny_button_text:
+  type: string
+  default: "Deny"
 policy_link_text:
   type: string
   default: "Learn more"
