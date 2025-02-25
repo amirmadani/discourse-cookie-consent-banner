@@ -8,6 +8,20 @@
 </script>
 
 <script type="text/discourse-plugin" version="0.8">
+  function setGoogleTags(obj, e) {
+    let status = (e === 'allow')? 'granted': 'denied';
+    if (gtag) {
+      gtag('consent', 'default', {
+        'ad_storage': status,
+        'ad_user_data': status,
+        'ad_personalization': status,
+        'analytics_storage': status
+      });
+    }
+    if ( e !== 'allow' ) {
+      obj.clearStatus();
+    }
+  }
   $(document).ready(function() {
     window.cookieconsent.initialise({
       "palette": {
@@ -20,12 +34,11 @@
           "text": settings.button_text_color
         }        
       },
-      "onStatusChange": function(element, status) {
-          console.log(element);
-          console.log(status);
+      "onStatusChange": function(e, status) {
+          setGoogleTags(this, e);
       },
-      "onInitialise": function(element) {
-          console.log(element);
+      "onInitialise": function(e) {
+          setGoogleTags(this, e);
       },
       "theme": settings.layout,
       "position": settings.position,
